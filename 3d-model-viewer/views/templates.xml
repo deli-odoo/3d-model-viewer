@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+   <template inherit_id="website_sale.shop_product_image" active="True" id="3d_model_viewer" name="3D Model Viewer">
+        <xpath expr="//div" position="replace">
+        </xpath>
+        <xpath expr="//div" position="replace">
+            <t t-if="uploaded">
+                <script type="module" src="/3d-model-viewer/static/lib/model-viewer.min.js"></script>
+                <model-viewer
+                    t-ref="modelViewer"
+                    t-att-src='download_url'
+                    alt="3D model"
+                    auto-rotate="1"
+                    camera-controls="1"
+                >
+                </model-viewer>
+            </t>
+            <t t-else="">
+                <div t-if="product_image._name == 'product.image' and product_image.embed_code" t-att-class="image_classes + ' ratio ratio-16x9'">
+                    <t t-out="product_image.embed_code"/>
+                </div>
+                <div t-else="" t-field="product_image.image_1920" t-att-class="image_classes + ' oe_unmovable'" t-options='{"widget": "image", "preview_image": "image_1024", "class": "oe_unmovable product_detail_img mh-100", "alt-field": "name", "zoom": product_image.can_image_1024_be_zoomed and "image_1920"}'/>
+            </t>
+        </xpath>
+   </template>
+</odoo>
